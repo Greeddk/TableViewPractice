@@ -14,8 +14,7 @@ class ShoppingTableViewController: UITableViewController {
     @IBOutlet var userTextField: UITextField!
     @IBOutlet var addButton: UIButton!
     
-    var isChecked: [Bool] = [false, false]
-    var shoppingList: [String] = ["그립톡 구매하기", "양말"]
+    var shoppingList: [(item: String ,favorite: Bool)] = [("그립톡 구매하기", false), ("양말", false)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +26,28 @@ class ShoppingTableViewController: UITableViewController {
     
     @IBAction func addButtonClicked(_ sender: UIButton) {
         
-        shoppingList.append(userTextField.text!)
+        shoppingList.append((userTextField.text!, false))
         userTextField.text = ""
         
         tableView.reloadData()
         
         view.endEditing(true)
         
+    }
+    
+    @IBAction func favoriteButtonClicked(_ sender: UIButton) {
+        
+        var isFavorite = shoppingList[sender.tag].favorite
+        
+        isFavorite.toggle()
+        shoppingList[sender.tag].favorite = isFavorite
+        
+        if isFavorite {
+            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+
     }
     
     
@@ -54,10 +68,12 @@ class ShoppingTableViewController: UITableViewController {
         cell.checkButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
         cell.checkButton.tintColor = .black
         
-        cell.shoppingItemLabel.text = shoppingList[indexPath.row]
+        cell.shoppingItemLabel.text = shoppingList[indexPath.row].item
         
         cell.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
         cell.favoriteButton.tintColor = .black
+        
+        cell.favoriteButton.tag = indexPath.row
         
         return cell
     }
