@@ -15,6 +15,8 @@ class ShoppingTableViewCell: UITableViewCell {
     
     @IBOutlet var shoppingListMaskingView: UIView!
     
+    var isClicked = false
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -22,5 +24,21 @@ class ShoppingTableViewCell: UITableViewCell {
         shoppingListMaskingView.layer.cornerRadius = 8
         
     }
+    
+    @IBAction func checkButtonClicked(_ sender: UIButton) {
+        
+        isClicked.toggle()
+        
+        if isClicked {
+            checkButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            
+            shoppingItemLabel.textColor = .systemGray
+        } else {
+            checkButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
+            
+            shoppingItemLabel.textColor = .black
+        }
+    }
+    
     
 }

@@ -14,6 +14,7 @@ class ShoppingTableViewController: UITableViewController {
     @IBOutlet var userTextField: UITextField!
     @IBOutlet var addButton: UIButton!
     
+    var isChecked: [Bool] = [false, false]
     var shoppingList: [String] = ["그립톡 구매하기", "양말"]
     
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class ShoppingTableViewController: UITableViewController {
         view.endEditing(true)
         
     }
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         

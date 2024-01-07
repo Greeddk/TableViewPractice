@@ -314,6 +314,9 @@
                                                         <constraint firstAttribute="width" constant="32" id="JAZ-bt-Dq1"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <connections>
+                                                        <action selector="checkButtonClicked:" destination="G67-yU-4Jj" eventType="touchUpInside" id="xqC-S3-tT3"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-nX-IsH">
                                                     <rect key="frame" x="301" y="8" width="32" height="34.333333333333336"/>
