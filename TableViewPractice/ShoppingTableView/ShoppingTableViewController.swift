@@ -37,12 +37,9 @@ class ShoppingTableViewController: UITableViewController {
     
     @IBAction func favoriteButtonClicked(_ sender: UIButton) {
         
-        var isFavorite = shoppingList[sender.tag].favorite
+        shoppingList[sender.tag].favorite.toggle()
         
-        isFavorite.toggle()
-        shoppingList[sender.tag].favorite = isFavorite
-        
-        if isFavorite {
+        if shoppingList[sender.tag].favorite {
             sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             sender.setImage(UIImage(systemName: "star"), for: .normal)
@@ -64,6 +61,8 @@ class ShoppingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingTableViewCell", for: indexPath) as! ShoppingTableViewCell
+        
+        cell.selectionStyle = .none
         
         cell.checkButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
         cell.checkButton.tintColor = .black
