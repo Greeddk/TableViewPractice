@@ -45,8 +45,12 @@ class ShoppingTableViewController: UITableViewController {
     @IBAction func favoriteButtonClicked(_ sender: UIButton) {
 
         shoppingList[sender.tag].favorite.toggle()
+        
+        shoppingList.sort { $0.favorite && !$1.favorite}
+        
+        tableView.reloadData()
 
-        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .fade)
+//        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .fade)
 
     }
     
@@ -78,7 +82,6 @@ class ShoppingTableViewController: UITableViewController {
             cell.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
         cell.favoriteButton.tintColor = .black
-        
         cell.favoriteButton.tag = indexPath.row
         
         return cell
