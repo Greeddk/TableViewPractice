@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct ShoppingList {
+    var item: String
+    var favorite: Bool
+}
+
 class ShoppingTableViewController: UITableViewController {
 
     @IBOutlet var textFieldMaskingView: UIView!
@@ -14,7 +19,9 @@ class ShoppingTableViewController: UITableViewController {
     @IBOutlet var userTextField: UITextField!
     @IBOutlet var addButton: UIButton!
     
-    var shoppingList: [(item: String ,favorite: Bool)] = [("그립톡 구매하기", false), ("양말", false)]
+    var shoppingList: [ShoppingList] = [ShoppingList(item: "양말", favorite: false),
+                                        ShoppingList(item: "칫솔", favorite: false),
+                                        ShoppingList(item: "삼겹살", favorite: false)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +33,7 @@ class ShoppingTableViewController: UITableViewController {
     
     @IBAction func addButtonClicked(_ sender: UIButton) {
         
-        shoppingList.append((userTextField.text!, false))
+        shoppingList.append(ShoppingList(item: userTextField.text!, favorite: false))
         userTextField.text = ""
         
         tableView.reloadData()
@@ -36,14 +43,10 @@ class ShoppingTableViewController: UITableViewController {
     }
     
     @IBAction func favoriteButtonClicked(_ sender: UIButton) {
-        
+
         shoppingList[sender.tag].favorite.toggle()
-        
-        if shoppingList[sender.tag].favorite {
-            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        } else {
-            sender.setImage(UIImage(systemName: "star"), for: .normal)
-        }
+
+        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .fade)
 
     }
     
@@ -69,7 +72,11 @@ class ShoppingTableViewController: UITableViewController {
         
         cell.shoppingItemLabel.text = shoppingList[indexPath.row].item
         
-        cell.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        if shoppingList[indexPath.row].favorite {
+            cell.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            cell.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
         cell.favoriteButton.tintColor = .black
         
         cell.favoriteButton.tag = indexPath.row
