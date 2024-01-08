@@ -18,7 +18,7 @@ class MagazineTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.rowHeight = 450
-        
+        tableView.separatorStyle = .none
         setTopView()
     }
 
