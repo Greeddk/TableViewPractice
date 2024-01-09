@@ -20,6 +20,7 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
     @IBOutlet var cityCollectionView: UICollectionView!
     
     var cityList = CityInfo().city
+    var tmp: [City] = CityInfo().city
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,22 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
         setTitleLabel()
         setSegmentControl()
         configureCollectionView()
+    }
+    
+    @IBAction func segmentClicked(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            tmp = cityList
+        case 1:
+            tmp = cityList.filter{ $0.domestic_travel }
+        case 2:
+            tmp = cityList.filter{ !$0.domestic_travel}
+        default:
+            print("error")
+        }
+        
+        cityCollectionView.reloadData()
     }
     
     func configureCollectionView() {
@@ -51,14 +68,14 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cityList.count
+        return tmp.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityInfoCollectionViewCell", for: indexPath) as! CityInfoCollectionViewCell
         
-        let item = cityList[indexPath.item]
+        let item = tmp[indexPath.item]
         
         cell.configureCell(item: item)
         
