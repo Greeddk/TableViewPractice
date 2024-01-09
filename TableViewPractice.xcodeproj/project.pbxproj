@@ -24,6 +24,7 @@
 		4264C6152B4D33450033A0A6 /* CityInfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264C6142B4D33450033A0A6 /* CityInfoCollectionViewController.swift */; };
 		4264C6182B4D33760033A0A6 /* CityInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264C6162B4D33760033A0A6 /* CityInfoCollectionViewCell.swift */; };
 		4264C6192B4D33760033A0A6 /* CityInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4264C6172B4D33760033A0A6 /* CityInfoCollectionViewCell.xib */; };
+		4264C61B2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264C61A2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		4264C6142B4D33450033A0A6 /* CityInfoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfoCollectionViewController.swift; sourceTree = "<group>"; };
 		4264C6162B4D33760033A0A6 /* CityInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		4264C6172B4D33760033A0A6 /* CityInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		4264C61A2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWithSegmentCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				4264C6142B4D33450033A0A6 /* CityInfoCollectionViewController.swift */,
 				4264C6162B4D33760033A0A6 /* CityInfoCollectionViewCell.swift */,
 				4264C6172B4D33760033A0A6 /* CityInfoCollectionViewCell.xib */,
+				4264C61A2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift */,
 			);
 			path = CityInfo;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			files = (
 				4264C5EC2B4A692B0033A0A6 /* SettingTableViewController.swift in Sources */,
 				4264C5F42B4A78EC0033A0A6 /* ShoppingTableViewCell.swift in Sources */,
+				4264C61B2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift in Sources */,
 				4264C6132B4D329F0033A0A6 /* CityInfo.swift in Sources */,
 				4264C5EE2B4A6B440033A0A6 /* SettingTableViewCell.swift in Sources */,
 				4264C5D82B4A62560033A0A6 /* AppDelegate.swift in Sources */,
