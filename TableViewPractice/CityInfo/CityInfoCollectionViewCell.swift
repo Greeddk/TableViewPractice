@@ -7,26 +7,44 @@
 
 import UIKit
 
+protocol customCollectionViewCell {
+    func setUIInCell()
+    func configureCell(item: City)
+}
+
 class CityInfoCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var cityImageView: UIImageView!
     @IBOutlet var cityName: UILabel!
     @IBOutlet var subLabel: UILabel!
     
+    var cellNumberValue: (cityNameSize: CGFloat, subLabelSize: CGFloat) = (16, 12)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cityImageView.contentMode = .scaleToFill
-        cityImageView.layer.cornerRadius = cityImageView.frame.height / 2
+       setUIInCell()
         
-        cityName.font = .boldSystemFont(ofSize: 16)
+    }
+
+}
+
+extension CityInfoCollectionViewCell: customCollectionViewCell {
+    
+    func setUIInCell() {
+        cityImageView.contentMode = .scaleToFill
+        
+        DispatchQueue.main.async {
+            self.cityImageView.layer.cornerRadius = self.cityImageView.frame.height / 2
+        }
+        
+        cityName.font = .boldSystemFont(ofSize: cellNumberValue.cityNameSize)
         cityName.textAlignment = .center
         
-        subLabel.font = .systemFont(ofSize: 12)
+        subLabel.font = .systemFont(ofSize: cellNumberValue.subLabelSize)
         subLabel.numberOfLines = 0
         subLabel.textColor = .systemGray
         subLabel.textAlignment = .center
-        
     }
     
     func configureCell(item: City) {

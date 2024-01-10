@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421E250C2B4E85C100D99462 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E250B2B4E85C100D99462 /* UIViewController+Extension.swift */; };
 		4264C5D82B4A62560033A0A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264C5D72B4A62560033A0A6 /* AppDelegate.swift */; };
 		4264C5DA2B4A62560033A0A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264C5D92B4A62560033A0A6 /* SceneDelegate.swift */; };
 		4264C5DF2B4A62560033A0A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4264C5DD2B4A62560033A0A6 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421E250B2B4E85C100D99462 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4264C5D42B4A62560033A0A6 /* TableViewPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4264C5D72B4A62560033A0A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4264C5D92B4A62560033A0A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				4264C5F82B4BE1260033A0A6 /* Magazine.swift */,
 				4264C5FB2B4BE23E0033A0A6 /* MagazineTableViewController.swift */,
 				4264C5FD2B4BE4430033A0A6 /* MagazineTableViewCell.swift */,
+				421E250B2B4E85C100D99462 /* UIViewController+Extension.swift */,
 			);
 			path = "SeSAC Travel";
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				4264C5F42B4A78EC0033A0A6 /* ShoppingTableViewCell.swift in Sources */,
 				4264C61B2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift in Sources */,
 				4264C6132B4D329F0033A0A6 /* CityInfo.swift in Sources */,
+				421E250C2B4E85C100D99462 /* UIViewController+Extension.swift in Sources */,
 				4264C5EE2B4A6B440033A0A6 /* SettingTableViewCell.swift in Sources */,
 				4264C5D82B4A62560033A0A6 /* AppDelegate.swift in Sources */,
 				4264C5F92B4BE1260033A0A6 /* Magazine.swift in Sources */,

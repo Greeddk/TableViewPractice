@@ -7,6 +7,20 @@
 
 import UIKit
 
+protocol customCollectionViewProtocol {
+    
+    var cityList: [City] { get }
+    var numberValueList: (titleLabelSize: CGFloat, spacingSize: CGFloat, NumberOfSpacing: CGFloat) { get set }
+    
+    func setTitleLabel()
+    
+}
+
+protocol customSegmentProtocol {
+    
+    func setSegmentControl()
+}
+
 enum area: String, CaseIterable {
     case all = "모두"
     case domestic = "국내"
@@ -21,6 +35,9 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
     
     var cityList = CityInfo().city
     var tmp: [City] = CityInfo().city
+    // 저장 프로퍼티는 extension에 추가할 수 없음. 연산을 이용해야 함
+    var numberValueList: (titleLabelSize: CGFloat, spacingSize: CGFloat, NumberOfSpacing: CGFloat) = (16, 20 ,3)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,27 +62,6 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
         
         cityCollectionView.reloadData()
     }
-    
-    func configureCollectionView() {
-        
-        let xib = UINib(nibName: "CityInfoCollectionViewCell", bundle: nil)
-        cityCollectionView.register(xib, forCellWithReuseIdentifier: "CityInfoCollectionViewCell")
-        
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 20
-        let cellWidth = UIScreen.main.bounds.width - spacing * 3
-        let cellHeight = UIScreen.main.bounds.height - spacing * 3
-        
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.itemSize = CGSize(width: cellWidth / 2, height: cellHeight / 3)
-        layout.scrollDirection = .vertical
-        cityCollectionView.collectionViewLayout = layout
-        
-        cityCollectionView.dataSource = self
-        cityCollectionView.delegate = self
-    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tmp.count
@@ -82,12 +78,45 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
         return cell
     }
     
+}
+
+extension CityWithSegmentCollectionView: customCollectionViewProtocol {
+    
     func setTitleLabel() {
         titleLabel.text = "인기 도시"
-        titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.font = .boldSystemFont(ofSize: numberValueList.titleLabelSize)
         titleLabel.textAlignment = .center
     }
+    
+}
 
+extension CityWithSegmentCollectionView {
+    
+    func configureCollectionView() {
+        
+        let xib = UINib(nibName: "CityInfoCollectionViewCell", bundle: nil)
+        cityCollectionView.register(xib, forCellWithReuseIdentifier: "CityInfoCollectionViewCell")
+        
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = numberValueList.spacingSize
+        let cellWidth = UIScreen.main.bounds.width - spacing * numberValueList.NumberOfSpacing
+        let cellHeight = UIScreen.main.bounds.height - spacing * numberValueList.NumberOfSpacing
+        
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        layout.itemSize = CGSize(width: cellWidth / 2, height: cellHeight / 3)
+        layout.scrollDirection = .vertical
+        cityCollectionView.collectionViewLayout = layout
+        
+        cityCollectionView.dataSource = self
+        cityCollectionView.delegate = self
+    }
+
+}
+
+extension CityWithSegmentCollectionView: customSegmentProtocol {
+    
     func setSegmentControl() {
         
         // 처음 모든 세그먼츠 삭제
@@ -99,5 +128,4 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
         
         segmentController.selectedSegmentIndex = 0
     }
-    
 }
