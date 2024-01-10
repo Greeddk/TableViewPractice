@@ -8,17 +8,25 @@
 import UIKit
 import Kingfisher
 
+protocol magazineViewProtocol {
+    
+    func configureTableView()
+    func setTopView()
+
+}
+
 class MagazineTableViewController: UITableViewController {
     
     @IBOutlet var appTitle: UILabel!
     
     let magazine = MagazineInfo().magazine
+    
+    var rowHeightSize: CGFloat = 450
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.rowHeight = 450
-        tableView.separatorStyle = .none
+        configureTableView()
         setTopView()
     }
 
@@ -38,26 +46,21 @@ class MagazineTableViewController: UITableViewController {
         
         cell.selectionStyle = .none
         
-        let url = URL(string: magazine[indexPath.row].photo_image)
-        cell.mainImageView.kf.setImage(with: url)
-        cell.mainImageView.contentMode = .scaleAspectFill
-        cell.mainImageView.layer.cornerRadius = 10
-        
-        cell.titleLabel.text = magazine[indexPath.row].title
-        cell.titleLabel.font = .boldSystemFont(ofSize: 22)
-        cell.titleLabel.textAlignment = .left
-        cell.titleLabel.numberOfLines = 2
-        
-        cell.subtitleLable.text = magazine[indexPath.row].subtitle
-        cell.subtitleLable.font = .systemFont(ofSize: 14)
-        cell.subtitleLable.textColor = .systemGray
-        
-        let result = changeDateFormat(date: magazine[indexPath.row].date)
-        cell.dateLabel.text = result
-        cell.dateLabel.font = .systemFont(ofSize: 12)
-        cell.dateLabel.textColor = .systemGray
+        let item = magazine[indexPath.item]
+        cell.configureCell(item: item)
         
         return cell
+    }
+
+
+}
+
+extension MagazineTableViewController: magazineViewProtocol {
+    
+    func configureTableView() {
+        
+        tableView.rowHeight = rowHeightSize
+        tableView.separatorStyle = .none
     }
     
     func setTopView() {
@@ -68,20 +71,4 @@ class MagazineTableViewController: UITableViewController {
         
     }
     
-    func changeDateFormat(date: String) -> String {
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyMMdd"
-        
-        let dateTypeData = formatter.date(from: date)
-        
-        let strFormatter = DateFormatter()
-        strFormatter.dateFormat = "yy년 MM월 dd일"
-        
-        let result = strFormatter.string(from: dateTypeData!)
-        return result
-        
-    }
-   
-
 }

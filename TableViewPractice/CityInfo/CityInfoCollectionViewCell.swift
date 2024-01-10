@@ -7,8 +7,11 @@
 
 import UIKit
 
-protocol customCollectionViewCell {
+protocol customCollectionViewCell: AnyObject {
+    
     func setUIInCell()
+    //class는 objc와 호환이 안되서 Optional Requirements로 선언할 수 없음 ㅜㅜ
+//    func configureCell(item: Magazine)
     func configureCell(item: City)
 }
 
