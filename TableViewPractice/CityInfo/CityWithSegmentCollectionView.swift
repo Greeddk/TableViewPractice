@@ -27,7 +27,7 @@ enum area: String, CaseIterable {
     case abroad = "해외"
 }
 
-class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CityWithSegmentCollectionView: UIViewController {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var segmentController: UISegmentedControl!
@@ -63,29 +63,14 @@ class CityWithSegmentCollectionView: UIViewController, UICollectionViewDelegate,
         cityCollectionView.reloadData()
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tmp.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityInfoCollectionViewCell", for: indexPath) as! CityInfoCollectionViewCell
-        
-        let item = tmp[indexPath.item]
-        
-        cell.configureCell(item: item)
-        
-        return cell
-    }
     
 }
 
 extension CityWithSegmentCollectionView: customCollectionViewProtocol {
     
     func setTitleLabel() {
-        titleLabel.text = "인기 도시"
-        titleLabel.font = .boldSystemFont(ofSize: numberValueList.titleLabelSize)
-        titleLabel.textAlignment = .center
+        
+        navigationItem.title = "인기 도시"
     }
     
 }
@@ -128,4 +113,31 @@ extension CityWithSegmentCollectionView: customSegmentProtocol {
         
         segmentController.selectedSegmentIndex = 0
     }
+}
+
+extension CityWithSegmentCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tmp.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityInfoCollectionViewCell", for: indexPath) as! CityInfoCollectionViewCell
+        
+        let item = tmp[indexPath.item]
+        
+        cell.configureCell(item: item)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let sb = UIStoryboard(name: "CityInfo", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: CityInfoListViewController.identifier) as! CityInfoListViewController
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
