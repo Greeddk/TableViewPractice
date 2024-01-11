@@ -52,6 +52,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8BF-of-ULo">
                                 <rect key="frame" x="53" y="4" width="32" height="32"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="nRd-eH-hdg"/>
                                     <constraint firstAttribute="height" constant="32" id="zzo-Sg-Cq1"/>
@@ -128,11 +129,11 @@
                 <outlet property="isFavorite" destination="8BF-of-ULo" id="gYE-0h-mSH"/>
                 <outlet property="placeImage" destination="Xff-Hc-8XX" id="x2O-uH-5jb"/>
                 <outlet property="placeLabel" destination="hQU-35-CsO" id="zR0-fv-EB6"/>
-                <outlet property="star1" destination="JWT-p0-6Zd" id="vnV-OU-iWY"/>
-                <outlet property="star2" destination="lcA-j0-5gH" id="C03-9p-Ypo"/>
-                <outlet property="star3" destination="3Rz-vm-GGe" id="OAy-rQ-Ob8"/>
-                <outlet property="star4" destination="RSJ-lN-lM4" id="neb-vT-9pL"/>
-                <outlet property="star5" destination="Xdq-hQ-l0i" id="8uf-MO-dxV"/>
+                <outletCollection property="starImage" destination="JWT-p0-6Zd" collectionClass="NSMutableArray" id="Iga-02-Jxp"/>
+                <outletCollection property="starImage" destination="lcA-j0-5gH" collectionClass="NSMutableArray" id="bkB-YC-LuW"/>
+                <outletCollection property="starImage" destination="3Rz-vm-GGe" collectionClass="NSMutableArray" id="kBS-0e-1k2"/>
+                <outletCollection property="starImage" destination="RSJ-lN-lM4" collectionClass="NSMutableArray" id="vgh-eR-BrY"/>
+                <outletCollection property="starImage" destination="Xdq-hQ-l0i" collectionClass="NSMutableArray" id="XXz-gY-PGh"/>
             </connections>
             <point key="canvasLocation" x="204.58015267175571" y="22.183098591549296"/>
         </tableViewCell>

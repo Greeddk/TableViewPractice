@@ -13,11 +13,7 @@ class CityInfoListTableViewCell: UITableViewCell {
     @IBOutlet var placeLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     
-    @IBOutlet var star1: UIImageView!
-    @IBOutlet var star2: UIImageView!
-    @IBOutlet var star3: UIImageView!
-    @IBOutlet var star4: UIImageView!
-    @IBOutlet var star5: UIImageView!
+    @IBOutlet var starImage: [UIImageView]!
     
     @IBOutlet var placeImage: UIImageView!
     @IBOutlet var isFavorite: UIImageView!
@@ -43,17 +39,6 @@ extension CityInfoListTableViewCell {
         descriptionLabel.textColor = .gray
         descriptionLabel.numberOfLines = 2
         descriptionLabel.font = .systemFont(ofSize: 12)
-        
-        star1.image = UIImage(systemName: "star.fill")
-        star1.tintColor = .orange
-        star2.image = UIImage(systemName: "star.fill")
-        star2.tintColor = .orange
-        star3.image = UIImage(systemName: "star.fill")
-        star3.tintColor = .orange
-        star4.image = UIImage(systemName: "star.fill")
-        star4.tintColor = .orange
-        star5.image = UIImage(systemName: "star.fill")
-        star5.tintColor = .orange
         
         favoriteCount.textColor = .systemGray
         favoriteCount.font = .systemFont(ofSize: 12)
@@ -90,8 +75,10 @@ extension CityInfoListTableViewCell {
         
         if isPreferred {
             isFavorite.image = UIImage(systemName: "heart.fill")
+            isFavorite.tintColor = .orange
         } else {
             isFavorite.image = UIImage(systemName: "heart")
+            isFavorite.tintColor = .orange
         }
     }
     
@@ -99,36 +86,15 @@ extension CityInfoListTableViewCell {
         
         let intScore = Int(round(score))
         
-        switch intScore {
-        case 1:
-            star2.tintColor = .systemGray5
-            star3.tintColor = .systemGray5
-            star4.tintColor = .systemGray5
-            star5.tintColor = .systemGray5
-        case 2:
-            star3.tintColor = .systemGray5
-            star4.tintColor = .systemGray5
-            star5.tintColor = .systemGray5
-        case 3:
-            star4.tintColor = .systemGray5
-            star5.tintColor = .systemGray5
-        case 4:
-            star5.tintColor = .systemGray5
-        case 5:
-            star1.tintColor = .orange
-            star2.tintColor = .orange
-            star3.tintColor = .orange
-            star4.tintColor = .orange
-            star5.tintColor = .orange
-        default:
-            star1.tintColor = .systemGray5
-            star2.tintColor = .systemGray5
-            star3.tintColor = .systemGray5
-            star4.tintColor = .systemGray5
-            star5.tintColor = .systemGray5
+        for i in 0...4 {
+            starImage[i].image = UIImage(systemName: "star.fill")
+            starImage[i].tintColor = .systemGray5
+        }
+        
+        for score in 0...intScore - 1 {
+            starImage[score].tintColor = .orange
         }
 
-        
     }
     
 }

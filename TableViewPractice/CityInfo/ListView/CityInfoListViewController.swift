@@ -22,10 +22,6 @@ class CityInfoListViewController: UIViewController {
         configureTableView()
     }
 
-    @objc func leftBarItemClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-
 }
 
 extension CityInfoListViewController { //UI
@@ -37,6 +33,10 @@ extension CityInfoListViewController { //UI
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(leftBarItemClicked))
         backButton.tintColor = .gray
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func leftBarItemClicked() {
+        navigationController?.popViewController(animated: true)
     }
     
     func configureTableView() {
