@@ -13,9 +13,7 @@ class ADTableViewCell: UITableViewCell {
     
     @IBOutlet var adSign: UILabel!
     @IBOutlet var adDescripLabel: UILabel!
-    
-    static let identifier = "ADTableViewCell"
-
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         

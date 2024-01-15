@@ -11,8 +11,6 @@ class CityDetailViewController: UIViewController {
     
     @IBOutlet var cityDetailLabel: UILabel!
     
-    static let identifier = "CityDetailViewController"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

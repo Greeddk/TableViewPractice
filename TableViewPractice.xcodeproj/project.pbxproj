@@ -35,6 +35,8 @@
 		429177F32B4FEABD00A69FC6 /* CityInfoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429177F12B4FEABD00A69FC6 /* CityInfoListTableViewCell.swift */; };
 		429177F42B4FEABD00A69FC6 /* CityInfoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 429177F22B4FEABD00A69FC6 /* CityInfoListTableViewCell.xib */; };
 		429177F72B500D3000A69FC6 /* ADDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429177F62B500D3000A69FC6 /* ADDetailViewController.swift */; };
+		42E303282B54F957007025C2 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E303272B54F957007025C2 /* UITableViewCell+Extension.swift */; };
+		42E3032A2B54FA2C007025C2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E303292B54FA2C007025C2 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		429177F12B4FEABD00A69FC6 /* CityInfoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfoListTableViewCell.swift; sourceTree = "<group>"; };
 		429177F22B4FEABD00A69FC6 /* CityInfoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityInfoListTableViewCell.xib; sourceTree = "<group>"; };
 		429177F62B500D3000A69FC6 /* ADDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDetailViewController.swift; sourceTree = "<group>"; };
+		42E303272B54F957007025C2 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		42E303292B54FA2C007025C2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				4264C5D72B4A62560033A0A6 /* AppDelegate.swift */,
 				4264C5D92B4A62560033A0A6 /* SceneDelegate.swift */,
 				4264C5DD2B4A62560033A0A6 /* Main.storyboard */,
+				42E303262B54F8F1007025C2 /* Extension */,
 				4264C6112B4D326F0033A0A6 /* CityInfo */,
 				4264C5FA2B4BE2050033A0A6 /* SeSAC Travel */,
 				4264C5F22B4A78D10033A0A6 /* ShoppingTableView */,
@@ -150,7 +155,7 @@
 				4264C5F82B4BE1260033A0A6 /* Magazine.swift */,
 				4264C5FB2B4BE23E0033A0A6 /* MagazineTableViewController.swift */,
 				4264C5FD2B4BE4430033A0A6 /* MagazineTableViewCell.swift */,
-				421E250B2B4E85C100D99462 /* UIViewController+Extension.swift */,
+				42E303292B54FA2C007025C2 /* WebViewController.swift */,
 			);
 			path = "SeSAC Travel";
 			sourceTree = "<group>";
@@ -186,6 +191,15 @@
 				4264C6142B4D33450033A0A6 /* CityInfoCollectionViewController.swift */,
 			);
 			path = practice;
+			sourceTree = "<group>";
+		};
+		42E303262B54F8F1007025C2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				421E250B2B4E85C100D99462 /* UIViewController+Extension.swift */,
+				42E303272B54F957007025C2 /* UITableViewCell+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,12 +284,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4264C5EC2B4A692B0033A0A6 /* SettingTableViewController.swift in Sources */,
+				42E3032A2B54FA2C007025C2 /* WebViewController.swift in Sources */,
 				4264C5F42B4A78EC0033A0A6 /* ShoppingTableViewCell.swift in Sources */,
 				429177F72B500D3000A69FC6 /* ADDetailViewController.swift in Sources */,
 				4264C61B2B4D3FE80033A0A6 /* CityWithSegmentCollectionView.swift in Sources */,
 				4264C6132B4D329F0033A0A6 /* CityInfo.swift in Sources */,
 				421E250C2B4E85C100D99462 /* UIViewController+Extension.swift in Sources */,
 				429177ED2B4FE99B00A69FC6 /* TravelInfo.swift in Sources */,
+				42E303282B54F957007025C2 /* UITableViewCell+Extension.swift in Sources */,
 				429177F32B4FEABD00A69FC6 /* CityInfoListTableViewCell.swift in Sources */,
 				421E25582B4FD0F600D99462 /* ADTableViewCell.swift in Sources */,
 				429177F02B4FEA7200A69FC6 /* CityInfoListViewController.swift in Sources */,

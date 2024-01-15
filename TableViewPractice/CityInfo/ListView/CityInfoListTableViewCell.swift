@@ -20,8 +20,6 @@ class CityInfoListTableViewCell: UITableViewCell {
     
     @IBOutlet var favoriteCount: UILabel!
     
-    static var identifier = "CityInfoListTableViewCell"
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         

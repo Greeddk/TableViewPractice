@@ -9,8 +9,6 @@ import UIKit
 
 class CityInfoListViewController: UIViewController {
 
-    static var identifier = "CityInfoListViewController"
-    
     var travelInfoList = TravelInfo().travel
     
     @IBOutlet var cityInfoListTableView: UITableView!

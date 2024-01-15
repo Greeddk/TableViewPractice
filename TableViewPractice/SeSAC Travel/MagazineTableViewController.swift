@@ -19,7 +19,7 @@ class MagazineTableViewController: UITableViewController {
     
     @IBOutlet var appTitle: UILabel!
     
-    let magazine = MagazineInfo().magazine
+    let magazine = MagazineInfo.magazine
     
     var rowHeightSize: CGFloat = 450
 
@@ -30,13 +30,8 @@ class MagazineTableViewController: UITableViewController {
         setTopView()
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return magazine.count
     }
 
@@ -44,12 +39,22 @@ class MagazineTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MagazineTableViewCell", for: indexPath) as! MagazineTableViewCell
         
-        cell.selectionStyle = .none
-        
         let item = magazine[indexPath.item]
         cell.configureCell(item: item)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: WebViewController.identifier) as! WebViewController
+        
+        vc.item = magazine[indexPath.row]
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        tableView.reloadRows(at: [indexPath], with: .fade)
+        
     }
 
 

@@ -12,8 +12,6 @@ class ADDetailViewController: UIViewController {
     @IBOutlet var adTextLabel: UILabel!
     @IBOutlet var dismissButton: UIButton!
     
-    static let identifier = "ADDetailViewController"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
