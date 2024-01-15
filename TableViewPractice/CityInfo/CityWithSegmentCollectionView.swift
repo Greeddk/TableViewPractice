@@ -33,8 +33,15 @@ class CityWithSegmentCollectionView: UIViewController {
     @IBOutlet var segmentController: UISegmentedControl!
     @IBOutlet var cityCollectionView: UICollectionView!
     
-    var cityList = CityInfo().city
-    var tmp: [City] = CityInfo().city
+    @IBOutlet var searchBar: UISearchBar!
+    
+    var cityList = CityInfo.city {
+        didSet {
+            cityCollectionView.reloadData()
+        }
+    }
+    var originalList = CityInfo.city
+    
     // 저장 프로퍼티는 extension에 추가할 수 없음. 연산을 이용해야 함
     var numberValueList: (titleLabelSize: CGFloat, spacingSize: CGFloat, NumberOfSpacing: CGFloat) = (16, 20 ,3)
 
@@ -43,6 +50,7 @@ class CityWithSegmentCollectionView: UIViewController {
         super.viewDidLoad()
         
         setTitleLabel()
+        setSearchBar()
         setSegmentControl()
         configureCollectionView()
     }
@@ -51,16 +59,15 @@ class CityWithSegmentCollectionView: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            tmp = cityList
+            cityList = CityInfo.city
         case 1:
-            tmp = cityList.filter{ $0.domestic_travel }
+            cityList = CityInfo.city.filter{ $0.domestic_travel }
         case 2:
-            tmp = cityList.filter{ !$0.domestic_travel}
+            cityList = CityInfo.city.filter{ !$0.domestic_travel }
         default:
             print("error")
         }
         
-        cityCollectionView.reloadData()
     }
 
     
@@ -98,6 +105,37 @@ extension CityWithSegmentCollectionView {
         cityCollectionView.delegate = self
     }
 
+    func setSearchBar() {
+        
+        searchBar.searchBarStyle = .minimal
+    }
+
+}
+
+extension CityWithSegmentCollectionView: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        let trimText = searchText.trimmingCharacters(in: .whitespaces)
+        var lowercaseText = trimText.lowercased()
+          
+        if lowercaseText.isEmpty {
+            
+            if segmentController.selectedSegmentIndex == 0 {
+                cityList = CityInfo.city
+            } else if segmentController.selectedSegmentIndex == 1{
+                cityList = CityInfo.city.filter{ $0.domestic_travel }
+            } else {
+                cityList = CityInfo.city.filter{ !$0.domestic_travel }
+            }
+            
+        } else {
+        
+            cityList = cityList.filter { $0.city_name.lowercased().contains(lowercaseText) || $0.city_english_name.lowercased().contains(lowercaseText) || $0.city_explain.lowercased().contains(lowercaseText) }
+            
+        }
+    }
+    
 }
 
 extension CityWithSegmentCollectionView: customSegmentProtocol {
@@ -118,14 +156,14 @@ extension CityWithSegmentCollectionView: customSegmentProtocol {
 extension CityWithSegmentCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tmp.count
+        return cityList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CityInfoCollectionViewCell", for: indexPath) as! CityInfoCollectionViewCell
         
-        let item = tmp[indexPath.item]
+        let item = cityList[indexPath.item]
         
         cell.configureCell(item: item)
         
