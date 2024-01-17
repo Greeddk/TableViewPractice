@@ -9,7 +9,7 @@ import UIKit
 
 protocol customCollectionViewProtocol {
     
-    var cityList: [City] { get }
+//    var cityList: [City] { get }
     var numberValueList: (titleLabelSize: CGFloat, spacingSize: CGFloat, NumberOfSpacing: CGFloat) { get set }
     
     func setTitleLabel()
@@ -21,13 +21,36 @@ protocol customSegmentProtocol {
     func setSegmentControl()
 }
 
-enum area: String, CaseIterable {
-    case all = "모두"
-    case domestic = "국내"
-    case abroad = "해외"
-}
-
 class CityWithSegmentCollectionView: UIViewController {
+    
+    enum Area: String, CaseIterable {
+        case all = "모두"
+        case domestic = "국내"
+        case abroad = "해외"
+        
+        var index: Int {
+            switch self {
+            case .all:
+                return 0
+            case .domestic:
+                return 1
+            case .abroad:
+                return 2
+            }
+        }
+        
+        var filteredList: [City] {
+            switch self {
+            case .all:
+                return CityInfo.city
+            case .domestic:
+                return CityInfo.city.filter { $0.domestic_travel }
+            case .abroad:
+                return CityInfo.city.filter { !$0.domestic_travel }
+            }
+        }
+        
+    }
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var segmentController: UISegmentedControl!
@@ -35,12 +58,12 @@ class CityWithSegmentCollectionView: UIViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     
+    var area: Area = .all
     var cityList = CityInfo.city {
         didSet {
             cityCollectionView.reloadData()
         }
     }
-    var originalList = CityInfo.city
     
     // 저장 프로퍼티는 extension에 추가할 수 없음. 연산을 이용해야 함
     var numberValueList: (titleLabelSize: CGFloat, spacingSize: CGFloat, NumberOfSpacing: CGFloat) = (16, 20 ,3)
@@ -57,19 +80,17 @@ class CityWithSegmentCollectionView: UIViewController {
     
     @IBAction func segmentClicked(_ sender: UISegmentedControl) {
         
-        switch sender.selectedSegmentIndex {
-        case 0:
-            cityList = CityInfo.city
-        case 1:
-            cityList = CityInfo.city.filter{ $0.domestic_travel }
-        case 2:
-            cityList = CityInfo.city.filter{ !$0.domestic_travel }
-        default:
-            print("error")
+        if sender.selectedSegmentIndex == 0 {
+
+        } else if sender.selectedSegmentIndex == 1 {
+            area = .domestic
+        } else {
+            area = .abroad
         }
         
+        cityList = area.filteredList
+        
     }
-
     
 }
 
@@ -122,16 +143,20 @@ extension CityWithSegmentCollectionView: UISearchBarDelegate {
         if lowercaseText.isEmpty {
             
             if segmentController.selectedSegmentIndex == 0 {
-                cityList = CityInfo.city
+                area = .all
             } else if segmentController.selectedSegmentIndex == 1{
-                cityList = CityInfo.city.filter{ $0.domestic_travel }
+                area = .domestic
             } else {
-                cityList = CityInfo.city.filter{ !$0.domestic_travel }
+                area = .abroad
             }
+            
+            cityList = area.filteredList
             
         } else {
         
-            cityList = cityList.filter { $0.city_name.lowercased().contains(lowercaseText) || $0.city_english_name.lowercased().contains(lowercaseText) || $0.city_explain.lowercased().contains(lowercaseText) }
+            cityList = cityList.filter { $0.city_name.lowercased().contains(lowercaseText) ||
+                                        $0.city_english_name.lowercased().contains(lowercaseText) ||
+                                        $0.city_explain.lowercased().contains(lowercaseText) }
             
         }
     }
@@ -145,7 +170,7 @@ extension CityWithSegmentCollectionView: customSegmentProtocol {
         // 처음 모든 세그먼츠 삭제
         segmentController.removeAllSegments()
         
-        area.allCases.enumerated().forEach { (index, section) in
+        Area.allCases.enumerated().forEach { (index, section) in
             segmentController.insertSegment(withTitle: section.rawValue, at: index, animated: false)
         }
         
