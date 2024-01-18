@@ -23,19 +23,19 @@ protocol customSegmentProtocol {
 
 class CityWithSegmentCollectionView: UIViewController {
     
-    enum Area: String, CaseIterable {
-        case all = "모두"
-        case domestic = "국내"
-        case abroad = "해외"
+    enum Area: Int, CaseIterable {
+        case all
+        case domestic
+        case abroad
         
-        var index: Int {
+        var stringValue: String {
             switch self {
             case .all:
-                return 0
+                return "모두"
             case .domestic:
-                return 1
+                return "국내"
             case .abroad:
-                return 2
+                return "해외"
             }
         }
         
@@ -58,7 +58,6 @@ class CityWithSegmentCollectionView: UIViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     
-    var area: Area = .all
     var cityList = CityInfo.city {
         didSet {
             cityCollectionView.reloadData()
@@ -80,16 +79,8 @@ class CityWithSegmentCollectionView: UIViewController {
     
     @IBAction func segmentClicked(_ sender: UISegmentedControl) {
         
-        if sender.selectedSegmentIndex == 0 {
-
-        } else if sender.selectedSegmentIndex == 1 {
-            area = .domestic
-        } else {
-            area = .abroad
-        }
-        
-        cityList = area.filteredList
-        
+        let index = sender.selectedSegmentIndex
+        cityList = Area.allCases[index].filteredList
     }
     
 }
@@ -142,15 +133,8 @@ extension CityWithSegmentCollectionView: UISearchBarDelegate {
           
         if lowercaseText.isEmpty {
             
-            if segmentController.selectedSegmentIndex == 0 {
-                area = .all
-            } else if segmentController.selectedSegmentIndex == 1{
-                area = .domestic
-            } else {
-                area = .abroad
-            }
-            
-            cityList = area.filteredList
+            let index = segmentController.selectedSegmentIndex
+            cityList = Area.allCases[index].filteredList
             
         } else {
         
@@ -171,7 +155,7 @@ extension CityWithSegmentCollectionView: customSegmentProtocol {
         segmentController.removeAllSegments()
         
         Area.allCases.enumerated().forEach { (index, section) in
-            segmentController.insertSegment(withTitle: section.rawValue, at: index, animated: false)
+            segmentController.insertSegment(withTitle: section.stringValue, at: index, animated: false)
         }
         
         segmentController.selectedSegmentIndex = 0
